@@ -20,12 +20,16 @@ class Main extends Component {
             tasks: tasks
         })
     }
+    deleteTask = (taskId) => {
+        tasks.splice(taskId, 1)
+        this.setState({ tasks: tasks })
+    }
     render() {
         return (
             <div>
 
                 <CreateTask createTask={this.createTask} />
-                <TaskList tasks={tasks} />
+                <TaskList tasks={this.state.tasks} deleteTask={this.deleteTask} />
             </div>
         )
     }
