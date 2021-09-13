@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
-import Main from './Main'
 
-export default class App extends Component {
+export default class TaskList extends Component {
     render() {
         return (
             <div>
-                <Main />
+                <h1>TaskLists</h1>
             </div>
         )
     }
