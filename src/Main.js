@@ -25,7 +25,7 @@ class Main extends Component {
             <div>
 
                 <CreateTask createTask={this.createTask} />
-                <TaskList />
+                <TaskList tasks={tasks} />
             </div>
         )
     }
