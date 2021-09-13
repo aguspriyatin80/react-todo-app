@@ -24,12 +24,18 @@ class Main extends Component {
         tasks.splice(taskId, 1)
         this.setState({ tasks: tasks })
     }
+    editTask = (taskId, task) => {
+        const taskItem = tasks[taskId]
+        taskItem.task = task
+        this.setState({ tasks: tasks })
+
+    }
     render() {
         return (
             <div>
 
                 <CreateTask createTask={this.createTask} />
-                <TaskList tasks={this.state.tasks} deleteTask={this.deleteTask} />
+                <TaskList tasks={this.state.tasks} deleteTask={this.deleteTask} editTask={this.editTask} />
             </div>
         )
     }
