@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import TaskList from './TaskList'
 
 export default class TaskItem extends Component {
     constructor(props) {
@@ -8,12 +7,16 @@ export default class TaskItem extends Component {
             task: this.props.taskItem.task,
             isEditing: false
         }
+
     }
     setEditingState = (isEditing) => {
         this.setState({ isEditing: isEditing })
     }
     handleChange = (event) => {
         this.setState({ task: event.target.value })
+    }
+    toggleTask = () => {
+        this.props.toggleTask(this.props.id)
     }
     deleteTask = () => {
         this.props.deleteTask(this.props.id)
@@ -35,17 +38,22 @@ export default class TaskItem extends Component {
                                 autoFocus />
                         </form>
                     </td>
-                    <td>
-                        <button onClick={this.handleSubmit} type="submit">Save</button>
-                        <button onClick={() => this.setEditingState(false)} type="button">Back</button>
+                    <td className="td-action">
+                        <button className="save" onClick={this.handleSubmit} type="submit">Save</button>
+                        <button className="back" onClick={() => this.setEditingState(false)} type="button">Back</button>
                     </td>
                 </>
                 :
                 <>
-                    <td>{this.props.taskItem.task}</td>
-                    <td>
-                        <button onClick={() => this.setEditingState(true)}>Edit</button>
-                        <button onClick={this.deleteTask}>Delete</button>
+                    <td className="task" onClick={this.toggleTask}>
+                        <input type="checkbox" readOnly checked={this.props.taskItem.isCompleted} />
+                        <span className={this.props.taskItem.isCompleted ? 'completed' : 'not-completed'}>
+                            {this.props.taskItem.task}
+                        </span>
+                    </td>
+                    <td className="td-action">
+                        <button className="edit" onClick={() => this.setEditingState(true)}>Edit</button>
+                        <button className="delete" onClick={this.deleteTask}>Delete</button>
                     </td>
                 </>
             }
